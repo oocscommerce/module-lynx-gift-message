@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OOCS Commerce (https://www.oocscommerce.com). All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Adds gift_message to the cart's props. -->
+    <type name="OOCS\LynxThemeComponent\Provider\Checkout\Cart">
+        <plugin name="oocs_lynx_giftmessage_cart" type="OOCS\LynxGiftMessage\Plugin\CartGiftMessage" sortOrder="10"/>
+    </type>
+    <!-- And to the order page's, guest orders included. -->
+    <type name="OOCS\LynxCustomer\Provider\Customer\OrderView">
+        <plugin name="oocs_lynx_giftmessage_order" type="OOCS\LynxGiftMessage\Plugin\OrderGiftMessage" sortOrder="10"/>
+    </type>
+</config>

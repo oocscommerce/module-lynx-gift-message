@@ -1,0 +1,58 @@
+extend type CheckoutCart @block(
+    container: "checkout.cart.item.actions"
+    name: "gift_message"
+    template: "OOCS_LynxGiftMessage::Components/CartItemGiftMessage"
+  )
+  @block(
+    container: "checkout.cart.order.actions"
+    name: "gift_message"
+    template: "OOCS_LynxGiftMessage::Components/CartGiftMessage"
+  ) {
+  "The order's and each allowed item's gift message (Plugin\\CartGiftMessage); absent while gift messages are off"
+  gift_message: GiftMessageCart @optional
+}
+
+extend type AccountOrderView @block(
+    container: "sales.order.item.after"
+    name: "gift_message"
+    template: "OOCS_LynxGiftMessage::Components/OrderItemGiftMessage"
+  )
+  @block(
+    container: "sales.order.items.after"
+    name: "gift_message"
+    template: "OOCS_LynxGiftMessage::Components/OrderGiftMessage"
+  ) {
+  "The gift messages the order carries (Plugin\\OrderGiftMessage); absent when it has none"
+  gift_message: GiftMessageOrder @optional
+}
+
+type GiftMessageText {
+  sender: String!
+  recipient: String!
+  message: String!
+}
+
+type GiftMessageCartItem {
+  item_id: Int!
+  message: GiftMessageText
+}
+
+type GiftMessageCart {
+  "Stores > Configuration > Sales > Gift Options > Allow Gift Messages on Order Level, and the quote ships something"
+  order_allowed: Boolean!
+  order: GiftMessageText
+  "Only the items that may carry one: the product's own setting, else the item-level config"
+  items: [GiftMessageCartItem!]!
+  labels: StringMap!
+}
+
+type GiftMessageOrderItem {
+  item_id: Int!
+  message: GiftMessageText!
+}
+
+type GiftMessageOrder {
+  order: GiftMessageText
+  items: [GiftMessageOrderItem!]!
+  labels: StringMap!
+}

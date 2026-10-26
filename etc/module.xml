@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OOCS Commerce (https://www.oocscommerce.com). All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="OOCS_LynxGiftMessage">
+        <sequence>
+            <!-- The cart: its containers and type, its provider. -->
+            <module name="OOCS_LynxCheckout"/>
+            <module name="OOCS_LynxThemeComponent"/>
+            <!-- The order page's containers and its provider. -->
+            <module name="OOCS_LynxCustomer"/>
+            <!-- Container and the build. -->
+            <module name="OOCS_LynxTheme"/>
+            <!-- Messages, their rules and the REST endpoints the cart saves through. -->
+            <module name="Magento_GiftMessage"/>
+        </sequence>
+    </module>
+</config>
